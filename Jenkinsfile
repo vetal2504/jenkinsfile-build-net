@@ -2,10 +2,12 @@ pipeline {
     agent any 
     stages {
         stage('Create folder') {
-            bat '''@echo off
-            set name=Cloud
-            mkdir %name%
-            '''
+	    steps {
+                bat '''@echo off
+            	set name=Cloud
+            	mkdir %name%
+            	'''
+            }
         } 
         stage('Test') { 
             steps {
