@@ -1,5 +1,8 @@
 pipeline {
     agent any 
+    environment {
+        Version = "1"
+    }
     stages {
         stage("Change name"){
             steps {
