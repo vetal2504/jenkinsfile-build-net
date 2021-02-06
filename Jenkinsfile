@@ -4,7 +4,7 @@ pipeline {
         stage("Change name"){
             steps {
                 script {
-                    currentBuild.displayName = "${BUILD_NAMBER} v:${Version}"
+                    currentBuild.displayName = "${BUILD_NUMBER} v:${Version}"
                 }
             }
         }
