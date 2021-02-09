@@ -15,9 +15,11 @@ pipeline {
             steps {
                 //changeAsmVer versionPattern: "${BUILD_NUMBER}", assemblyFile: AssemblyInfo.cs, regexPattern: 'Assembly(\\w*)Version\\("[0-9\\*\\.]+"\\)', replacementPattern: Assembly$1Version("%s")
 		//load ".version"
-		readProperties(file: .version).each {key, value -> env[key] = value }
-		echo "${env.Version}"
-		echo "${env.Name}"
+		withEnv(readFile('.version').split('\n') as List) {
+    			sh "echo ${env.Version}"
+		}
+		//echo "${env.Version}"
+		//echo "${env.Name}"
             }
         }
         /* stage('Create folder') {
