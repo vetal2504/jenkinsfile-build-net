@@ -14,7 +14,8 @@ pipeline {
         stage("Change assembly version"){
             steps {
                 //changeAsmVer versionPattern: "${BUILD_NUMBER}", assemblyFile: AssemblyInfo.cs, regexPattern: 'Assembly(\\w*)Version\\("[0-9\\*\\.]+"\\)', replacementPattern: Assembly$1Version("%s")
-		load ".version"
+		//load ".version"
+		readProperties(file: .version).each {key, value -> env[key] = value }
 		echo "${env.Version}"
 		echo "${env.Name}"
             }
