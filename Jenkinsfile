@@ -13,13 +13,14 @@ pipeline {
         }
         stage("Change assembly version"){
             steps {
-                //changeAsmVer versionPattern: "${BUILD_NUMBER}", assemblyFile: AssemblyInfo.cs, regexPattern: 'Assembly(\\w*)Version\\("[0-9\\*\\.]+"\\)', replacementPattern: Assembly$1Version("%s")
-		//load ".version"
-		withEnv(readFile('.version').split('\n') as List) {
-    			sh "echo ${env.Version}"
-		}
-		//echo "${env.Version}"
-		//echo "${env.Name}"
+		script {
+            		def props = readProperties file: '.version'
+            		env.Version = props.Version
+            		env.Name = props.Name
+        	}
+
+        	sh "echo The weather is $Name"
+        	sh "echo The weather is $Version"
             }
         }
         /* stage('Create folder') {
